@@ -14,7 +14,12 @@ public class TPSCharacterController : MonoBehaviour
 
     void Start()
     {
-        
+        animator = characterBody.GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+       // LookAround();
     }
     private void LookAround()
     {

@@ -8,6 +8,7 @@ public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     [SerializeField]
     private RectTransform lever;
     private RectTransform rectTransform;
+
     [SerializeField, Range(10f, 150f)]
     private float leverRange;
 
@@ -49,5 +50,11 @@ public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         controller.Move(inputDirection);
     }
     
-    
+    void Update()
+    {
+        if (isInput)
+        {
+            InputControlVector();
+        }
+    }
 }
