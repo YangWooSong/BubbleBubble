@@ -11,15 +11,18 @@ public class TPSCharacterController : MonoBehaviour
     private Transform cameraArm;
 
     Animator animator;
-
+    public GameObject Btn;
+    Rigidbody rb;
     void Start()
     {
         animator = characterBody.GetComponent<Animator>();
+
     }
 
     private void Update()
     {
-       // LookAround();
+        // LookAround();
+        Shoot();
     }
     private void LookAround()
     {
@@ -54,5 +57,18 @@ public class TPSCharacterController : MonoBehaviour
             characterBody.forward = moveDir;
             transform.position += moveDir * Time.deltaTime * 5f;
         }
+    }
+
+    public void Shoot()
+    {
+        animator.SetBool("isShoot", Btn.GetComponent<BtnControl>().isShoot);
+    }
+    public void Jump()
+    {
+        if(Btn.GetComponent<BtnControl>().isJump == true)
+        {
+            rb.AddForce(Vector3.right * 3, ForceMode.Impulse);
+        }
+        
     }
 }
