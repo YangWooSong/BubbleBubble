@@ -12,7 +12,8 @@ public class TPSCharacterController : MonoBehaviour
 
     Animator animator;
     public GameObject Btn;
-    Rigidbody rb;
+    //public Rigidbody rb;
+    public Vector2 inputDirection;
     void Start()
     {
         animator = characterBody.GetComponent<Animator>();
@@ -23,6 +24,8 @@ public class TPSCharacterController : MonoBehaviour
     {
         // LookAround();
         Shoot();
+        Move(inputDirection);
+        Jump();
     }
     private void LookAround()
     {
@@ -53,7 +56,7 @@ public class TPSCharacterController : MonoBehaviour
             Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
             Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
             Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
-
+            Debug.Log(moveDir);
             characterBody.forward = moveDir;
             transform.position += moveDir * Time.deltaTime * 5f;
         }
@@ -67,7 +70,10 @@ public class TPSCharacterController : MonoBehaviour
     {
         if(Btn.GetComponent<BtnControl>().isJump == true)
         {
-            rb.AddForce(Vector3.right * 3, ForceMode.Impulse);
+            Debug.Log(Btn.GetComponent<BtnControl>().isJump == true);
+
+            //rb.AddForce(Vector3.up * 100, ForceMode.Impulse); 
+            //이친구가 점프못함 이거는 캐릭터 고치고 해결을 같이 해봅시다 양송이
         }
         
     }

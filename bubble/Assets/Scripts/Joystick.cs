@@ -44,6 +44,7 @@ public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             : inputDir.normalized * leverRange;
         lever.anchoredPosition = inputVector;
         inputDirection = inputVector / leverRange;
+        //Debug.Log(inputDirection);
     }
     private void InputControlVector()
     {
