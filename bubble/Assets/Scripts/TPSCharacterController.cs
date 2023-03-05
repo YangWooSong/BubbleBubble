@@ -14,6 +14,7 @@ public class TPSCharacterController : MonoBehaviour
     public GameObject Btn;
     //public Rigidbody rb;
     public Vector2 inputDirection;
+    private bool isMove = false;
     void Start()
     {
         animator = characterBody.GetComponent<Animator>();
@@ -24,7 +25,7 @@ public class TPSCharacterController : MonoBehaviour
     {
         // LookAround();
         Shoot();
-        Move(inputDirection);
+        //Move(inputDirection); 
         Jump();
     }
     private void LookAround()
@@ -49,7 +50,17 @@ public class TPSCharacterController : MonoBehaviour
     public void Move(Vector2 inputDirection)
     {
         Vector2 moveInput = inputDirection;
-        bool isMove = moveInput.magnitude != 0;
+        if (moveInput.magnitude != 0)
+        {
+            isMove = true;
+            Debug.Log(isMove);
+        }
+        else
+        {
+            isMove = false;
+            Debug.Log(isMove);
+        }
+
         animator.SetBool("isMove", isMove);
         if (isMove)
         {
@@ -59,6 +70,7 @@ public class TPSCharacterController : MonoBehaviour
             Debug.Log(moveDir);
             characterBody.forward = moveDir;
             transform.position += moveDir * Time.deltaTime * 5f;
+            
         }
     }
 
@@ -70,10 +82,11 @@ public class TPSCharacterController : MonoBehaviour
     {
         if(Btn.GetComponent<BtnControl>().isJump == true)
         {
-            Debug.Log(Btn.GetComponent<BtnControl>().isJump == true);
+           //Debug.Log(Btn.GetComponent<BtnControl>().isJump);
 
             //rb.AddForce(Vector3.up * 100, ForceMode.Impulse); 
             //이친구가 점프못함 이거는 캐릭터 고치고 해결을 같이 해봅시다 양송이
+            //윽
         }
         
     }

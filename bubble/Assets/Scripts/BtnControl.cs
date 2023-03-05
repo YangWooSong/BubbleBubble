@@ -21,8 +21,8 @@ public class BtnControl : MonoBehaviour
     public void IsShoot()
     {
         isShoot = true;
-        Debug.Log(isShoot);
-        Invoke("Delay", 1f);
+       // Debug.Log(isShoot);
+        Invoke("Delay", 0.5f);
        
     }
 
