@@ -8,14 +8,12 @@ public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     [SerializeField]
     private RectTransform lever;
     private RectTransform rectTransform;
-
     [SerializeField, Range(10f, 150f)]
     private float leverRange;
-
-    private Vector2 inputDirection;    // 추가
-    private bool isInput;    // 추가
     [SerializeField]
-    private TPSCharacterController controller;
+    private Player controller;
+    private Vector2 inputDirection;
+    private bool isInput;    // 추가
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -23,39 +21,37 @@ public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        ControlJoystickLever(eventData);  // 추가
+        var inputPos = eventData.position - rectTransform.anchoredPosition;
+        var inputVector = inputPos.magnitude < leverRange ? inputPos
+            : inputPos.normalized * leverRange;
+        lever.anchoredPosition = inputVector;
+        inputDirection = inputVector / leverRange;
         isInput = true;    // 추가
-    } 
+    }
     public void OnDrag(PointerEventData eventData)
     {
-        ControlJoystickLever(eventData);    // 추가
-        
+        var inputPos = eventData.position - rectTransform.anchoredPosition;
+        var inputVector = inputPos.magnitude < leverRange ? inputPos
+            : inputPos.normalized * leverRange;
+        lever.anchoredPosition = inputVector;
+        inputDirection = inputVector / leverRange;
     }
     public void OnEndDrag(PointerEventData eventData)
     {
         lever.anchoredPosition = Vector2.zero;
-        isInput = false;
+        isInput = false;    // 추가
+        inputDirection = Vector2.zero;
         controller.Move(Vector2.zero);
-    }
-    public void ControlJoystickLever(PointerEventData eventData)
-    {
-        var inputDir = eventData.position - rectTransform.anchoredPosition;
-        var inputVector = inputDir.magnitude < leverRange ? inputDir
-            : inputDir.normalized * leverRange;
-        lever.anchoredPosition = inputVector;
-        inputDirection = inputVector / leverRange;
-        //Debug.Log(inputDirection);
-    }
-    private void InputControlVector()
-    {
-        controller.Move(inputDirection);
     }
     
     void Update()
     {
+        //Debug.Log(inputDirection);
         if (isInput)
         {
-            InputControlVector();
+            controller.Move(inputDirection);
         }
     }
+
+
 }
