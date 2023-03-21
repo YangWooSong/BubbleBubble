@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public int JumpPower;
     private bool isMove;
     public float speed;
+    private bool isJump = false;
     //Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,12 @@ public class Player : MonoBehaviour
     }
     public void IsJump()
     {
-        rigid.AddForce(Vector3.up * JumpPower, ForceMode.Impulse);
+        if(isJump == true)
+        {
+            rigid.AddForce(Vector3.up * JumpPower, ForceMode.Impulse);
+            isJump = false;
+        }
+        
     }
     public void Move(Vector2 inputDirection)
     {
@@ -39,6 +45,11 @@ public class Player : MonoBehaviour
         }
 
         transform.position += move * Time.deltaTime * speed;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground") isJump = true;
     }
 }
 
