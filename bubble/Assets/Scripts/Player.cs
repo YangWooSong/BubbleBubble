@@ -12,11 +12,14 @@ public class Player : MonoBehaviour
     private bool isMove;
     public float speed;
     private bool isJump = false;
-    //Animator animator;
+    private bool getWeapon = false;
+    
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        animator.SetBool("isMove", false);
     }
 
     // Update is called once per frame
@@ -33,15 +36,21 @@ public class Player : MonoBehaviour
         }
         
     }
+
+    public void GetWeapon()
+    {
+        getWeapon = !getWeapon;
+        animator.SetBool("GetWeapon", getWeapon);
+    }
     public void Move(Vector2 inputDirection)
     {
         isMove = inputDirection.magnitude != 0;
-        //animator.SetBool("isMove", isMove);
+
         Vector3 move = new Vector3(inputDirection.y, 0f, -inputDirection.x).normalized;
         if (isMove)
         {
 
-            transform.position += move * Time.deltaTime * speed;
+            transform.position += move * Time.deltaTime * speed;     
         }
 
         transform.position += move * Time.deltaTime * speed;
