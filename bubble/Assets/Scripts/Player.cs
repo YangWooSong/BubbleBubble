@@ -12,14 +12,15 @@ public class Player : MonoBehaviour
     private bool isMove;
     public float speed;
     private bool isJump = false;
-    private bool getWeapon = false;
-    
+    public bool getWeapon = false;
+    private int shootCount;
     public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
         animator.SetBool("isMove", false);
+        shootCount = 0;
     }
 
     // Update is called once per frame
@@ -36,11 +37,38 @@ public class Player : MonoBehaviour
         }
         
     }
-
     public void GetWeapon()
     {
         getWeapon = !getWeapon;
-        animator.SetBool("GetWeapon", getWeapon);
+        animator.SetBool("getWeapon", getWeapon);
+    }
+    public void IsShoot()
+    {
+      
+        if (getWeapon == true)
+        {
+            animator.SetBool("isShoot", true);
+            shootCount += 1;
+            Invoke("ShootSetting", 5f);  //5초후 실행
+            if (shootCount > 4)
+            {
+                shootCount = 0;
+                animator.SetBool("isLoad", true);
+                Invoke("LoadSetting", 1f);
+                Debug.Log("장전");
+            }
+        }
+    }
+
+    private void ShootSetting()
+    {
+        Debug.Log("Delay");
+        animator.SetBool("isShoot", false);
+    }
+
+    private void LoadSetting()
+    {
+        animator.SetBool("isLoad", false);
     }
     public void Move(Vector2 inputDirection)
     {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -261,7 +261,7 @@ MonoBehaviour:
   leverRange: 40
   controller: {fileID: 1290971184}
   animator: {fileID: 1290971187}
-  player: {fileID: 0}
+  player: {fileID: 1290971183}
 --- !u!114 &153576100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1426,6 +1426,7 @@ MonoBehaviour:
   rigid: {fileID: 1103001119}
   JumpPower: 10
   speed: 1
+  getWeapon: 0
   animator: {fileID: 0}
 --- !u!136 &1103001118
 CapsuleCollider:
@@ -1723,6 +1724,7 @@ MonoBehaviour:
   rigid: {fileID: 1290971186}
   JumpPower: 10
   speed: 3
+  getWeapon: 0
   animator: {fileID: 1290971187}
 --- !u!136 &1290971185
 CapsuleCollider:
@@ -2014,9 +2016,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 9c8fa52d6e433a54dbacae431fe80b09, type: 3}
-        m_TargetAssemblyTypeName: BtnControl, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1290971184}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: IsShoot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

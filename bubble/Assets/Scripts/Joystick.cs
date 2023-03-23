@@ -15,7 +15,7 @@ public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private Vector2 inputDirection;
     private bool isInput;    // Ãß°¡
     public Animator animator;
-   // public GameObject player;
+    public GameObject player; 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -52,11 +52,11 @@ public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (isInput)
         {
             controller.Move(inputDirection);
-            //if (player.getComponent<Player>().getWeapon == true)
-            //{
-            //    animator.SetBool("ww", true);
-            //}
-            //else animator.SetBool("isMove", true);
+            if (player.GetComponent<Player>().getWeapon == true)
+            {
+                animator.SetBool("ww", true);
+            }
+            else animator.SetBool("isMove", true);
         }
         else 
         { 
