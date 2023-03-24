@@ -47,26 +47,38 @@ public class Player : MonoBehaviour
       
         if (getWeapon == true)
         {
-            animator.SetBool("isShoot", true);
-            shootCount += 1;
-            Invoke("ShootSetting", 5f);  //5초후 실행
-            if (shootCount > 4)
+           
+            if(animator.GetBool("isShoot") == false)
             {
-                shootCount = 0;
-                animator.SetBool("isLoad", true);
-                Invoke("LoadSetting", 1f);
-                Debug.Log("장전");
+                animator.SetBool("isShoot", true);
+                Invoke("ShootSetting", 1f);
+                shootCount += 1;
+                Invoke("LoadTrueSetting", 0.5f);
             }
+            
+
         }
     }
 
     private void ShootSetting()
     {
-        Debug.Log("Delay");
         animator.SetBool("isShoot", false);
+
     }
 
-    private void LoadSetting()
+    private void LoadTrueSetting()
+    {
+        if (shootCount > 4)
+        {
+
+                Debug.Log("장전");
+                animator.SetBool("isLoad", true);
+                Invoke("LoadFalseSetting", 1f);
+                shootCount = 0;
+
+        }
+    }
+    private void LoadFalseSetting()
     {
         animator.SetBool("isLoad", false);
     }
