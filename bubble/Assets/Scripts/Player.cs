@@ -10,9 +10,11 @@ public class Player : MonoBehaviour
     private Rigidbody rigid;
     public int JumpPower;
     private bool isMove;
+    private bool isRotation;
     public float speed;
     private bool isJump = false;
     public bool getWeapon = false;
+    public float lookSensitivity = 0;
     private int shootCount;
     public Animator animator;
     // Start is called before the first frame update
@@ -30,12 +32,12 @@ public class Player : MonoBehaviour
     }
     public void IsJump()
     {
-        if(isJump == true)
+        if (isJump == true)
         {
             rigid.AddForce(Vector3.up * JumpPower, ForceMode.Impulse);
             isJump = false;
         }
-        
+
     }
     public void GetWeapon()
     {
@@ -44,18 +46,18 @@ public class Player : MonoBehaviour
     }
     public void IsShoot()
     {
-      
+
         if (getWeapon == true)
         {
-           
-            if(animator.GetBool("isShoot") == false)
+
+            if (animator.GetBool("isShoot") == false)
             {
                 animator.SetBool("isShoot", true);
                 Invoke("ShootSetting", 1f);
                 shootCount += 1;
                 Invoke("LoadTrueSetting", 0.5f);
             }
-            
+
 
         }
     }
@@ -71,10 +73,10 @@ public class Player : MonoBehaviour
         if (shootCount > 4)
         {
 
-                Debug.Log("장전");
-                animator.SetBool("isLoad", true);
-                Invoke("LoadFalseSetting", 1f);
-                shootCount = 0;
+            Debug.Log("장전");
+            animator.SetBool("isLoad", true);
+            Invoke("LoadFalseSetting", 1f);
+            shootCount = 0;
 
         }
     }
@@ -85,12 +87,16 @@ public class Player : MonoBehaviour
     public void Move(Vector2 inputDirection)
     {
         isMove = inputDirection.magnitude != 0;
-
-        Vector3 move = new Vector3(inputDirection.y, 0f, -inputDirection.x).normalized;
+        Vector3 _moveHoizontal = transform.right * inputDirection.y;
+        Vector3 _moveVertial = transform.forward * -inputDirection.x;
+        Vector3 move = (_moveVertial + _moveHoizontal).normalized * speed;
         if (isMove)
         {
-
-            transform.position += move * Time.deltaTime * speed;     
+            transform.position += move * Time.deltaTime * speed;
+            float _yRotation = inputDirection.x;
+            Vector3 _characterRotationY = new Vector3(0f, _yRotation, 0f) * lookSensitivity;
+            rigid.MoveRotation(rigid.rotation * Quaternion.Euler(_characterRotationY));
+            Debug.Log(_characterRotationY);
         }
 
         transform.position += move * Time.deltaTime * speed;
@@ -101,4 +107,3 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Ground") isJump = true;
     }
 }
-
