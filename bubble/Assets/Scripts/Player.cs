@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     public float lookSensitivity = 0;
     private int shootCount;
     public Animator animator;
+    public GameObject bulletPos;
+    public GameObject bullet;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +52,7 @@ public class Player : MonoBehaviour
 
         if (getWeapon == true)
         {
-
+            Instantiate(bullet, bulletPos.transform.position, bulletPos.transform.rotation);
             if (animator.GetBool("isShoot") == false)
             {
                 animator.SetBool("isShoot", true);
