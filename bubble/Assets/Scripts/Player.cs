@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     public Animator animator;
     public GameObject bulletPos;
     public GameObject bullet;
-
+    public int HP=10;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +32,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move(inputDirection);
+        if(HP < 0)
+        {
+            Debug.Log("Á×À½");
+        }
     }
     public void IsJump()
     {

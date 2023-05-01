@@ -16,4 +16,12 @@ public class Bullet : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.GetComponent<Player>().HP -= 2;
+        }
+    }
 }
