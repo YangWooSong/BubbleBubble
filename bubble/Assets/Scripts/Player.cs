@@ -52,23 +52,24 @@ public class Player : MonoBehaviour
     {
         getWeapon = !getWeapon;
         animator.SetBool("getWeapon", getWeapon);
+        if(getWeapon == true) gun.SetActive(true);
+        else gun.SetActive(false);
     }
     public void IsShoot()
     {
 
         if (getWeapon == true)
-        {
-            gun.SetActive(true);
-            Instantiate(bullet, bulletPos.transform.position, bulletPos.transform.rotation);
+        {  
+            
             if (animator.GetBool("isShoot") == false)
             {
                 animator.SetBool("isShoot", true);
+                Instantiate(bullet, bulletPos.transform.position, bulletPos.transform.rotation);
                 Invoke("ShootSetting", 1f);
                 shootCount += 1;
                 Invoke("LoadTrueSetting", 0.5f);
             }
         }
-        else gun.SetActive(false);
     }
 
     private void ShootSetting()

@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float power = 3.0f;
+    public float power = 100.0f;
+    public float distance = 20.0f;
+    private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Rigidbody>().AddForce(Vector3.right * power, ForceMode.VelocityChange);
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        rb.velocity = transform.forward * 30f;
+        // 총알이 일정 거리 이상 움직였을 때 파괴하기
+        if (transform.position.magnitude > distance)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,5 +30,6 @@ public class Bullet : MonoBehaviour
         {
             other.GetComponent<Player>().HP -= 2;
         }
+        Destroy(gameObject);
     }
 }
