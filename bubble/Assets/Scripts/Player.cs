@@ -20,9 +20,11 @@ public class Player : MonoBehaviour
     public GameObject bulletPos;
     public GameObject bullet;
     public int HP=10;
+    public GameObject gun;
     // Start is called before the first frame update
     void Start()
     {
+        gun.SetActive(false);
         rigid = GetComponent<Rigidbody>();
         animator.SetBool("isMove", false);
         shootCount = 0;
@@ -56,6 +58,7 @@ public class Player : MonoBehaviour
 
         if (getWeapon == true)
         {
+            gun.SetActive(true);
             Instantiate(bullet, bulletPos.transform.position, bulletPos.transform.rotation);
             if (animator.GetBool("isShoot") == false)
             {
@@ -64,9 +67,8 @@ public class Player : MonoBehaviour
                 shootCount += 1;
                 Invoke("LoadTrueSetting", 0.5f);
             }
-
-
         }
+        else gun.SetActive(false);
     }
 
     private void ShootSetting()
