@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Camara
   - Ground
+  - Bullet
+  - Zombie
   layers:
   - Default
   - TransparentFX
