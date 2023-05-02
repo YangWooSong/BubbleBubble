@@ -5,14 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour
 {
-   public void ToMenu()
+   public void To_01_Menu()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("01_Menu");
     }
-    //public void To_01_Map()
-    //{
-    //    SceneManager.LoadScene("01_Map");
-    //}
+    public void To_02_Menu()
+    {
+        SceneManager.LoadScene("02_Menu");
+    }
+    public void To_04_Map()
+    {
+        SceneManager.LoadScene("04_Map");
+    }
     //public void To_02_Map()
     //{
     //    SceneManager.LoadScene("02_Map");
