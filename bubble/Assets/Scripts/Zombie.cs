@@ -8,8 +8,7 @@ public class Zombie : MonoBehaviour
     public Transform targetTransform;
     public float followSpeed = 2f;
     public Transform spawnpoint;
-    private Animator animator;
-    private bool isAttacking = false;
+    public Animator animator;
     void Start()
     {
         InvokeRepeating("zombiespawn", 30f, 30f);
@@ -21,14 +20,10 @@ public class Zombie : MonoBehaviour
         {
             // Move towards the target transform at a constant speed
             transform.position = Vector3.MoveTowards(transform.position,
-                targetTransform.position, followSpeed * Time.deltaTime);
+            targetTransform.position, followSpeed * Time.deltaTime);
             // Rotate towards the target transform
             transform.LookAt(targetTransform);
             animator.SetBool("Walk", true);
-            if (isAttacking)
-            {
-                animator.SetBool("Attack", true);
-            }
         }
         if (zombieHp <= 0)
         {
@@ -36,19 +31,11 @@ public class Zombie : MonoBehaviour
             Destroy(gameObject, 3f);
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Zombie"))
-        {
-            isAttacking = true;
-            other.GetComponent<Player>().HP -= 2;
-        }
-    }
     public void zombiespawn()
     {
-        // Á»ºñ »ý¼º
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         GameObject zombie = Instantiate(gameObject, spawnpoint.position, Quaternion.identity);
-        // Á»ºñ¸¦ ÇÃ·¹ÀÌ¾î¸¦ µû¶ó¿Àµµ·Ï ¼³Á¤
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Zombie zombieScript = zombie.GetComponent<Zombie>();
         zombieScript.targetTransform = targetTransform;
     }
