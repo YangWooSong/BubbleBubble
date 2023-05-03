@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         rb.velocity = transform.forward * power;
-        // ÃÑ¾ËÀÌ ÀÏÁ¤ °Å¸® ÀÌ»ó ¿òÁ÷¿´À» ¶§ ÆÄ±«ÇÏ±â
+        // ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ä±ï¿½ï¿½Ï±ï¿½
         //if (transform.position.magnitude > distance)
         //{
         //    Destroy(gameObject);
@@ -32,4 +32,5 @@ public class Bullet : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
 }
