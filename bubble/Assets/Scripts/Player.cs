@@ -116,4 +116,5 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground") isJump = true;
     }
+    
 }

@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Zombie : MonoBehaviour
 {
-    public float zombieHp = 10f;
+    public float zombieHp = 0f;
     public Transform targetTransform;
     public float followSpeed = 2f;
     public Transform spawnpoint;
-    public Animator animator;
+    private Animator animator;
+    public GameObject bubble;
+    public int boom = 0;
     void Start()
     {
         InvokeRepeating("zombiespawn", 30f, 30f);
         animator = GetComponent<Animator>();
+        bubble.SetActive(false);
+
     }
     private void Update()
     {
@@ -27,9 +31,10 @@ public class Zombie : MonoBehaviour
         }
         if (zombieHp <= 0)
         {
-            animator.SetBool("Death", true);
-            Destroy(gameObject, 3f);
+            bubble.SetActive(true);
+            targetTransform = null;
         }
+        
     }
     public void zombiespawn()
     {
@@ -38,5 +43,11 @@ public class Zombie : MonoBehaviour
         // ���� �÷��̾ ��������� ����
         Zombie zombieScript = zombie.GetComponent<Zombie>();
         zombieScript.targetTransform = targetTransform;
+    }
+    public void zombieDeath()
+    {
+        bubble.SetActive(false);
+        animator.SetBool("Death", true);
+        Destroy(gameObject, 5f);
     }
 }

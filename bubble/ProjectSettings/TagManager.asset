@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Bullet
   - Zombie
+  - Bubble
   layers:
   - Default
   - TransparentFX

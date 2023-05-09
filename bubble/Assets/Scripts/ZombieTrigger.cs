@@ -5,7 +5,6 @@ using UnityEngine;
 public class ZombieTrigger : MonoBehaviour
 {
     private Animator animator;
-    private GameObject obj;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -14,7 +13,7 @@ public class ZombieTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            GetComponent<Zombie>().followSpeed = 0;
+            GetComponent<Zombie>().targetTransform = null;
             Debug.Log("닿음");
             animator.SetBool("Walk", false);
             animator.SetBool("Attack", true);
